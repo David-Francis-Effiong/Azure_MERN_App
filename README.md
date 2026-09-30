@@ -63,5 +63,36 @@ The app is already configured to serve the React frontend from the Express backe
 ### Note on Build Process
 If you use GitHub integration, Azure's Kudu engine or GitHub Actions will automatically run `npm install` and `npm start`. Ensure that you have built the React app (`cd client && npm install && npm run build`) and committed the `client/dist` folder to your repository, or add a post-install script in `package.json` to build the frontend on Azure.
 
-## Testing Your App
-Once deployment is complete, go to the **Overview** page of your Web App and click the **Default domain** URL. Your MERN application should be live!
+---
+
+## How to View This Project
+
+### 1. Viewing Locally
+To view the project on your own machine:
+1. Open a terminal and navigate to the project directory: `cd I:\TECH\GoMyCode\Azure_MERN`
+2. Start the server (which will also serve the frontend): `npm start`
+3. Open your web browser and go to `http://localhost:5000`
+
+### 2. Viewing Live on Azure
+To view the deployed project on Azure:
+1. Go to your Azure Portal.
+2. Navigate to your **App Service** (Web App).
+3. On the **Overview** page, look for the **Default domain** URL (it usually looks like `https://<your-app-name>.azurewebsites.net`).
+4. Click that link to see your live MERN application!
+
+---
+
+## Important Security Note: Azure Cosmos DB URLs
+
+If you are using Azure Cosmos DB, you might come across URLs like:
+- `https://webmernapp-server.documents.azure.com/`
+- `https://webmernapp-server.mongo.cosmos.azure.com/`
+
+**What do they mean?**
+These are your private database endpoints provided by Azure Cosmos DB's MongoDB API. They act exactly like a MongoDB Atlas cluster, allowing your Express backend to read and write data.
+
+**Why shouldn't they be public?**
+These URLs are strict backend connections. Making them public in your code or documentation is a major security risk. If a malicious user discovers your database URL, they could potentially access, steal, or delete your user data.
+
+**How to use them properly:**
+You should keep these URLs securely inside a full Connection String (which includes a secure password) and place them inside the **Environment variables** section of your Azure Web App settings under the variable name `MONGODB_URI`. Never hardcode them into your public GitHub files or documentation.
