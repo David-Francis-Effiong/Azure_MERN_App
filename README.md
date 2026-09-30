@@ -2,6 +2,10 @@
 
 This is a checkpoint project for GoMyCode demonstrating how to deploy a MERN (MongoDB, Express, React, Node.js) stack application to Microsoft Azure.
 
+## Live Demo
+
+**[Link to Live Azure App](https://webmernapp-server.azurewebsites.net)** *(Replace this with your actual Azure Web App URL once deployed)*
+
 ## Project Structure
 
 - `server.js`: The Express backend, configured to connect to MongoDB and serve the compiled React frontend.
@@ -15,8 +19,16 @@ This is a checkpoint project for GoMyCode demonstrating how to deploy a MERN (Mo
 
 ## Deployment Instructions (Microsoft Azure)
 
-### 1. Set Up MongoDB Atlas
-Since Azure doesn't offer a native MongoDB service, you will need to use MongoDB Atlas.
+### 1. Set Up Database (Azure Cosmos DB or MongoDB Atlas)
+You can use **Azure Cosmos DB** (which has a MongoDB API) or **MongoDB Atlas**.
+
+**Option A: Using Azure Cosmos DB (Recommended for Azure ecosystem)**
+- Azure Cosmos DB provides a MongoDB-compatible API.
+- In the Azure Portal, create an "Azure Cosmos DB for MongoDB" resource.
+- Once created, go to **Connection String** to get your Primary Connection String.
+- Note: The endpoint URLs (like `https://<name>.mongo.cosmos.azure.com/`) are **private database endpoints**. They should **never** be made public or placed directly in your front-facing documentation. Instead, they form part of your `MONGODB_URI` connection string (e.g., `mongodb://<username>:<password>@<name>.mongo.cosmos.azure.com:10255/?ssl=true...`) which stays securely inside your Azure Configuration.
+
+**Option B: Using MongoDB Atlas**
 - Sign up at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 - Create a new cluster (the free tier works well).
 - Go to **Database Access** and create a new database user.
